@@ -5,7 +5,7 @@ function FaceRecognition({ imageUrl }) {
     return (
       <div className='center ma' alt='img'>
         <div className='absolute mt2'>
-          <img src={imageUrl} alt='img' width='500px' height='auto' />
+          <img src={imageUrl} alt='img' width='500px' height='auto' id='inputImage' />
         </div>
       </div>
     );
