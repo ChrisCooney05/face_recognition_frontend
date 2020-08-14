@@ -7,7 +7,6 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition'
 import Particles from 'react-particles-js'
 import Clarifai from 'clarifai'
 import './App.css';
-import { getElementError } from '@testing-library/react';
 
 const app = new Clarifai.App({
   apiKey: '2bbaa1cdf7314962be09b4e47a0e3dfb'
@@ -52,7 +51,6 @@ class App extends Component {
   }
 
   setFaceBoxState = (box) => {
-    console.log(box);
     this.setState({ box: box });
   }
 
@@ -80,7 +78,7 @@ class App extends Component {
         <ImageLinkForm
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit} />
-        <FaceRecognition imageUrl={this.state.imageUrl} />
+        <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box} />
       </div>
     );
   }
