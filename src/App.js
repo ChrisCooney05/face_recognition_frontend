@@ -3,6 +3,7 @@ import Navigation from './components/Navigation/Navigation'
 import Logo from './components/Logo/Logo'
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm'
 import Rank from './components/Rank/Rank'
+import SignIn from './components/SignIn/SignIn'
 import FaceRecognition from './components/FaceRecognition/FaceRecognition'
 import Particles from 'react-particles-js'
 import Clarifai from 'clarifai'
@@ -31,9 +32,8 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: '',
-      box: {
-
-      }
+      box: {},
+      route: 'signIn'
     }
   }
 
@@ -73,12 +73,17 @@ class App extends Component {
           params={particlesEffect}
         />
         <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkForm
-          onInputChange={this.onInputChange}
-          onButtonSubmit={this.onButtonSubmit} />
-        <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box} />
+        {this.state.route === 'signIn' ?
+          <SignIn /> :
+          <div>
+            <Logo />
+            <Rank />
+            <ImageLinkForm
+              onInputChange={this.onInputChange}
+              onButtonSubmit={this.onButtonSubmit} />
+            <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box} />
+          </div>
+        }
       </div>
     );
   }
