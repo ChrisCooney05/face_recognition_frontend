@@ -78,8 +78,7 @@ class App extends Component {
           params={particlesEffect}
         />
         <Navigation onRouteChange={this.onRouteChange} />
-        {this.state.route === 'signIn' ?
-          <SignIn onRouteChange={this.onRouteChange} /> :
+        {this.state.route === 'home' ?
           <div>
             <Logo />
             <Rank />
@@ -87,7 +86,12 @@ class App extends Component {
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit} />
             <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box} />
-          </div>
+          </div> :
+          (
+            this.state.route === 'signIn' ?
+              <SignIn onRouteChange={this.onRouteChange} /> :
+              <Register onRouteChange={this.onRouteChange} />
+          )
         }
       </div>
     );
