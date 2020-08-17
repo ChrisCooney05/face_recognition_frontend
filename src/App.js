@@ -6,6 +6,7 @@ import Rank from './components/Rank/Rank'
 import SignIn from './components/SignIn/SignIn'
 import FaceRecognition from './components/FaceRecognition/FaceRecognition'
 import Particles from 'react-particles-js'
+import Register from './components/Register/Register'
 import Clarifai from 'clarifai'
 import './App.css';
 
