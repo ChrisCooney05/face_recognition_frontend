@@ -10,15 +10,37 @@ class Register extends Component {
     };
   }
   onEmailChange = event => {
-    this.setState({ signInEmail: event.target.value });
+    this.setState({ email: event.target.value });
   };
 
   onPasswordChange = event => {
-    this.setState({ signInPassword: event.target.value });
+    this.setState({ password: event.target.value });
   };
-  render() {
-    const { onRouteChange } = this.props;
 
+  onNameChange = event => {
+    this.setState({ name: event.target.value });
+  };
+
+  onSubmitRegister = () => {
+    fetch("http://localhost:3000/register", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+        name: this.state.name,
+      }),
+    })
+      .then(response => response.json())
+      .then(user => {
+        if (user) {
+          console.log(user);
+          this.props.onRouteChange("home");
+        }
+      });
+  };
+
+  render() {
     return (
       <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 center shadow-5">
         <main className="pa4 black-80">
@@ -30,6 +52,7 @@ class Register extends Component {
                   Name
                 </label>
                 <input
+                  onChange={this.onNameChange}
                   className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="text"
                   name="name"
@@ -41,6 +64,7 @@ class Register extends Component {
                   Email
                 </label>
                 <input
+                  onChange={this.onEmailChange}
                   className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="email"
                   name="email-address"
@@ -52,6 +76,7 @@ class Register extends Component {
                   Password
                 </label>
                 <input
+                  onChange={this.onPasswordChange}
                   className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="password"
                   name="password"
@@ -61,7 +86,7 @@ class Register extends Component {
             </fieldset>
             <div className="">
               <input
-                onClick={() => onRouteChange("home")}
+                onClick={this.onSubmitRegister}
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib pointer"
                 type="submit"
                 value="Register"
