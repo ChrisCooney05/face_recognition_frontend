@@ -1,16 +1,12 @@
-import React from 'react'
+import React from "react";
 
-function Rank() {
+function Rank({ name, entries }) {
   return (
     <div>
-      <div className='white f3'>
-        {'Your rank is ...'}
-      </div>
-      <div className='white f1'>
-        {'#5'}
-      </div>
+      <div className="white f3">{`${name}, your current rank is ...`}</div>
+      <div className="white f1">{entries}</div>
     </div>
   );
 }
 
-export default Rank
+export default Rank;
