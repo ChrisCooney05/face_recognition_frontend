@@ -114,6 +114,30 @@ class App extends Component {
 
   render() {
     const { isSignedIn, route, imageUrl, box } = this.state;
+    let componentsToRender;
+
+    if (route === "home") {
+      componentsToRender = (
+        <div>
+          <Logo />
+          <Rank name={this.state.user.name} entries={this.state.user.entries} />
+          <ImageLinkForm
+            onInputChange={this.onInputChange}
+            onButtonSubmit={this.onButtonSubmit}
+          />
+          <FaceRecognition imageUrl={imageUrl} box={box} />
+        </div>
+      );
+    } else if (route === "signIn") {
+      componentsToRender = (
+        <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
+      );
+    } else {
+      componentsToRender = (
+        <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
+      );
+    }
+
     return (
       <div className="App">
         <Particles className="particles" params={particlesEffect} />
@@ -121,27 +145,7 @@ class App extends Component {
           onRouteChange={this.onRouteChange}
           isSignedIn={isSignedIn}
         />
-        {route === "home" ? (
-          <div>
-            <Logo />
-            <Rank
-              name={this.state.user.name}
-              entries={this.state.user.entries}
-            />
-            <ImageLinkForm
-              onInputChange={this.onInputChange}
-              onButtonSubmit={this.onButtonSubmit}
-            />
-            <FaceRecognition imageUrl={imageUrl} box={box} />
-          </div>
-        ) : route === "signIn" ? (
-          <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
-        ) : (
-          <Register
-            onRouteChange={this.onRouteChange}
-            loadUser={this.loadUser}
-          />
-        )}
+        {componentsToRender}
       </div>
     );
   }
