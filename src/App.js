@@ -58,6 +58,7 @@ class App extends Component {
   };
 
   calculateFaceLocation = data => {
+    // data.outputs[0].data.regions returns all bounding_box for multi face recognition
     const clarifaiFace =
       data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById("inputImage");
