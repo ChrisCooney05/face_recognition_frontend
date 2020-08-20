@@ -1,8 +1,13 @@
 import React from "react";
-import "./FaceRecognition.css";
+import BoundingBox from "../BoundingBox/BoundingBox";
 
 function FaceRecognition({ imageUrl, box }) {
-  console.log(box);
+  let borderArray;
+  if (box.length) {
+    borderArray = box.map((singleBox, i) => {
+      return <BoundingBox singleBox={singleBox} key={i} />;
+    });
+  }
   if (imageUrl !== "") {
     return (
       <div className="center ma" alt="img">
@@ -14,15 +19,7 @@ function FaceRecognition({ imageUrl, box }) {
             height="auto"
             id="inputImage"
           />
-          <div
-            className="bounding-box"
-            style={{
-              top: box.topRow,
-              right: box.rightCol,
-              bottom: box.bottomRow,
-              left: box.leftCol,
-            }}
-          ></div>
+          {borderArray}
         </div>
       </div>
     );
