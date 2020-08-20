@@ -21,23 +21,25 @@ const particlesEffect = {
   },
 };
 
+const initialState = {
+  input: "",
+  imageUrl: "",
+  box: {},
+  route: "signIn",
+  isSignedIn: false,
+  user: {
+    id: "",
+    name: "",
+    email: "",
+    entries: 0,
+    joined: "",
+  },
+};
+
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      input: "",
-      imageUrl: "",
-      box: {},
-      route: "signIn",
-      isSignedIn: false,
-      user: {
-        id: "",
-        name: "",
-        email: "",
-        entries: 0,
-        joined: "",
-      },
-    };
+    this.state = initialState;
   }
 
   loadUser = user => {
@@ -99,7 +101,8 @@ class App extends Component {
             .then(response => response.json())
             .then(count => {
               this.setState(Object.assign(this.state.user, { entries: count }));
-            });
+            })
+            .catch(err => console.log(err));
         }
         this.setFaceBoxState(this.calculateFaceLocation(response));
       })
@@ -108,7 +111,7 @@ class App extends Component {
 
   onRouteChange = route => {
     if (route === "signIn" || route === "register") {
-      this.setState({ isSignedIn: false });
+      this.setState(initialState);
     } else {
       this.setState({ isSignedIn: true });
     }
