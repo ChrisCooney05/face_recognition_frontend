@@ -59,17 +59,19 @@ class App extends Component {
 
   calculateFaceLocation = data => {
     // data.outputs[0].data.regions returns all bounding_box for multi face recognition
-    const clarifaiFace =
-      data.outputs[0].data.regions[0].region_info.bounding_box;
+    const clarifaiFace = data.outputs[0].data.regions;
     const image = document.getElementById("inputImage");
     const width = Number(image.width);
     const height = Number(image.height);
-    return {
-      leftCol: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightCol: width - clarifaiFace.right_col * width,
-      bottomRow: height - clarifaiFace.bottom_row * height,
-    };
+    return clarifaiFace.map(face => {
+      const singleFace = face.region_info.bounding_box;
+      return {
+        leftCol: singleFace.left_col * width,
+        topRow: singleFace.top_row * height,
+        rightCol: width - singleFace.right_col * width,
+        bottomRow: height - singleFace.bottom_row * height,
+      };
+    });
   };
 
   setFaceBoxState = box => {
