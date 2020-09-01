@@ -1,7 +1,5 @@
 # Face recognition app - Frontend
 
-App can be seen deployed [here](https://face-bot.netlify.app/)<br/><br/>
-This project is 90% complete, there are a still a few bits to fix regarding sign in and registration verification<br/>
 App has been built with React and styled using some css and Tachyons.<br/>
 The back end for this app can be seen [here](https://github.com/ChrisCooney05/face_recognition_backend)
 
