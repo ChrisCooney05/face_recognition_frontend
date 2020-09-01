@@ -32,9 +32,10 @@ class SignIn extends Component {
           this.props.loadUser(user);
           this.props.onRouteChange("home");
           this.setState({ loginFailed: false });
-        } else {
-          this.setState({ loginFailed: true });
         }
+      })
+      .catch(err => {
+        this.setState({ loginFailed: true });
       });
   };
 
