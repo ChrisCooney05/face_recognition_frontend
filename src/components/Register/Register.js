@@ -9,6 +9,7 @@ class Register extends Component {
       passwordConf: "",
       name: "",
       passwordError: false,
+      userExists: false,
     };
   }
   onEmailChange = event => {
@@ -45,17 +46,22 @@ class Register extends Component {
           if (user.id) {
             this.props.loadUser(user);
             this.props.onRouteChange("home");
+          } else {
+            this.setState({ userExists: true });
           }
         });
     }
   };
 
   render() {
-    const { passwordError } = this.state;
+    const { passwordError, userExists } = this.state;
     return (
       <div>
         {passwordError === true && (
           <h1 className="center">Passwords do not match</h1>
+        )}
+        {userExists === true && (
+          <h1 className="center">Email already in use</h1>
         )}
         <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 center shadow-5">
           <main className="pa4 black-80">
@@ -106,7 +112,7 @@ class Register extends Component {
                       className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                       type="password"
                       name="passwordConf"
-                      id="password"
+                      id="passwordConf"
                     />
                   </div>
                 </div>
