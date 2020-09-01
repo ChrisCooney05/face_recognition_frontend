@@ -20,6 +20,7 @@ class SignIn extends Component {
   onSubmitSignIn = () => {
     fetch("https://facerecogapi.herokuapp.com/signin", {
       method: "post",
+      mode: "cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: this.state.signInEmail,
@@ -45,7 +46,7 @@ class SignIn extends Component {
     return (
       <div>
         {loginFailed === true && (
-          <h1 className="center red ">Incorrect Login Credentials</h1>
+          <h1 className="center black ">Incorrect Login Credentials</h1>
         )}
         <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 center shadow-5">
           <main className="pa4 black-80">
