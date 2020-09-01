@@ -20,7 +20,7 @@ class SignIn extends Component {
   onSubmitSignIn = () => {
     fetch("https://facerecogapi.herokuapp.com/signin", {
       method: "post",
-      mode: "no-cors",
+      mode: "*cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: this.state.signInEmail,
