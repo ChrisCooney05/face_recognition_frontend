@@ -10,7 +10,7 @@ function FaceRecognition({ imageUrl, box }) {
   }
   if (imageUrl !== "") {
     return (
-      <div className="center ma" alt="img">
+      <div className="center ma">
         <div className="absolute mt2">
           <img
             src={imageUrl}
