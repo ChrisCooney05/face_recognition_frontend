@@ -4,8 +4,8 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signInEmail: "",
-      signInPassword: "",
+      signInEmail: "test@test.co.uk",
+      signInPassword: "Welcome123",
       loginFailed: false,
     };
   }
@@ -42,7 +42,7 @@ class SignIn extends Component {
   };
 
   render() {
-    const { loginFailed } = this.state;
+    const { loginFailed, signInEmail, signInPassword } = this.state;
     return (
       <div>
         {loginFailed === true && (
@@ -63,6 +63,7 @@ class SignIn extends Component {
                     type="email"
                     name="email-address"
                     id="email-address"
+                    value={signInEmail}
                   />
                 </div>
                 <div className="mv3">
@@ -75,6 +76,7 @@ class SignIn extends Component {
                     type="password"
                     name="password"
                     id="password"
+                    value={signInPassword}
                   />
                 </div>
               </fieldset>
