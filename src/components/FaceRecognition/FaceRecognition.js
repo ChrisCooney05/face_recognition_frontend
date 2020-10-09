@@ -24,7 +24,20 @@ function FaceRecognition({ imageUrl, box }) {
       </div>
     );
   } else {
-    return <div></div>;
+    return (
+      <div className="white f3 b">
+        <br />
+        <p>
+          Welcome to Face-Bot! to make things easier heres a link for you to
+          test me!
+          <br />
+          <br />
+          https://www.halffullnotempty.com/wp-content/uploads/Gandalf-quotes.jpg
+          <br />
+          <br />I also work on group photos
+        </p>
+      </div>
+    );
   }
 }
 
