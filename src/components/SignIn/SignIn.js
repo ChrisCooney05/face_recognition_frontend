@@ -91,6 +91,11 @@ class SignIn extends Component {
             </div>
           </main>
         </article>
+        <div className="white f3 b mw6 center">
+          Whilst there is a working sign in box, to make things a little easier
+          the form has been pre filed for you, go ahead and click sign in to get
+          started
+        </div>
       </div>
     );
   }
