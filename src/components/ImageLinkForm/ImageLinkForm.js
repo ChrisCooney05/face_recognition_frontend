@@ -4,9 +4,6 @@ import "./ImageLinkForm.css";
 function ImageLinkForm({ onInputChange, onButtonSubmit, input }) {
   return (
     <div>
-      <p className="f3 white b">
-        {"Hello human, give me an image and I shall find the faces for you"}
-      </p>
       <div className="center">
         <div className="pa4 br3 shadow-5 form center">
           <input
