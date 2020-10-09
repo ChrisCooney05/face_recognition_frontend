@@ -9,38 +9,39 @@ class SignIn extends Component {
       loginFailed: false,
     };
   }
-  onEmailChange = event => {
+  onEmailChange = (event) => {
     this.setState({ signInEmail: event.target.value });
   };
 
-  onPasswordChange = event => {
+  onPasswordChange = (event) => {
     this.setState({ signInPassword: event.target.value });
   };
 
-  onSubmitSignIn = () => {
-    fetch("https://facerecogapi.herokuapp.com/signin", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: this.state.signInEmail.toLowerCase(),
-        password: this.state.signInPassword,
-      }),
-    })
-      .then(response => response.json())
-      .then(user => {
-        if (user.id) {
-          this.props.loadUser(user);
-          this.props.onRouteChange("home");
-          this.setState({ loginFailed: false });
+  onSubmitSignIn = async () => {
+    try {
+      const loginFetch = await fetch(
+        "https://facerecogapi.herokuapp.com/signin",
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: this.state.signInEmail.toLowerCase(),
+            password: this.state.signInPassword,
+          }),
         }
-      })
-      .catch(err => {
-        this.setState({ loginFailed: true });
-      });
+      );
+      const user = await loginFetch.json();
+      if (user.id) {
+        this.props.loadUser(user);
+        this.props.onRouteChange("home");
+        this.setState({ loginFailed: false });
+      }
+    } catch (err) {
+      this.setState({ loginFailed: true });
+    }
   };
 
   render() {
-    const { onRouteChange } = this.props;
     const { loginFailed } = this.state;
     return (
       <div>
@@ -84,14 +85,6 @@ class SignIn extends Component {
                   type="submit"
                   value="Sign in"
                 />
-              </div>
-              <div className="lh-copy mt3">
-                <p
-                  onClick={() => onRouteChange("register")}
-                  className="f6 link dim black db pointer"
-                >
-                  Register
-                </p>
               </div>
             </div>
           </main>
