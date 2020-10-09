@@ -78,34 +78,37 @@ class App extends Component {
     this.setState({ input: event.target.value });
   };
 
-  onButtonSubmit = () => {
+  onButtonSubmit = async () => {
     this.setState({ imageUrl: this.state.input });
-    fetch("https://facerecogapi.herokuapp.com/imageurl", {
-      method: "post",
+    try {
+      const apiCall = await fetch(
+        "https://facerecogapi.herokuapp.com/imageurl",
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            input: this.state.input,
+          }),
+        }
+      );
+      const imageBox = await apiCall.json();
+      this.setFaceBoxState(this.calculateFaceLocation(imageBox));
+      this.handleCount();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  handleCount = async () => {
+    const imageCount = await fetch("https://facerecogapi.herokuapp.com/image", {
+      method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        input: this.state.input,
+        id: this.state.user.id,
       }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response) {
-          fetch("https://facerecogapi.herokuapp.com/image", {
-            method: "put",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              id: this.state.user.id,
-            }),
-          })
-            .then((response) => response.json())
-            .then((count) => {
-              this.setState(Object.assign(this.state.user, { entries: count }));
-            })
-            .catch((err) => console.log(err));
-        }
-        this.setFaceBoxState(this.calculateFaceLocation(response));
-      })
-      .catch((err) => console.log(err));
+    });
+    const count = await imageCount.json();
+    this.setState(Object.assign(this.state.user, { entries: count }));
   };
 
   onRouteChange = (route) => {
