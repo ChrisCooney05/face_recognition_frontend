@@ -94,6 +94,7 @@ class App extends Component {
       const imageBox = await apiCall.json();
       this.setFaceBoxState(this.calculateFaceLocation(imageBox));
       this.handleCount();
+      this.setState({ input: "" });
     } catch (err) {
       console.log(err);
     }
@@ -121,7 +122,7 @@ class App extends Component {
   };
 
   render() {
-    const { isSignedIn, route, imageUrl, box } = this.state;
+    const { isSignedIn, route, imageUrl, box, input } = this.state;
     let componentsToRender;
 
     if (route === "home") {
@@ -132,6 +133,7 @@ class App extends Component {
           <ImageLinkForm
             onInputChange={this.onInputChange}
             onButtonSubmit={this.onButtonSubmit}
+            input={input}
           />
           <FaceRecognition imageUrl={imageUrl} box={box} />
         </div>
