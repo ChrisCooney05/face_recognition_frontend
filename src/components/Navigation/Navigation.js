@@ -6,7 +6,7 @@ function Navigation({ onRouteChange, isSignedIn }) {
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
         <p
           onClick={() => onRouteChange("signIn")}
-          className="f3 dim link underline pointer pa3 black"
+          className="f3 dim link underline pointer pa3 white"
         >
           Sign Out
         </p>
@@ -17,7 +17,7 @@ function Navigation({ onRouteChange, isSignedIn }) {
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
         <p
           onClick={() => onRouteChange("signIn")}
-          className="f3 dim link underline pointer pa3 black"
+          className="f3 dim link underline pointer pa3 white"
         >
           Sign In
         </p>
