@@ -13,7 +13,7 @@ function ImageLinkForm({ onInputChange, onButtonSubmit, input }) {
             value={input}
           />
           <button
-            className="w-30 grow link dib f4 ph3 pv2 white bg-light-purple"
+            className="w-30 grow link dib f4 ph3 pv2 white bg-black"
             onClick={onButtonSubmit}
           >
             Get Finding
